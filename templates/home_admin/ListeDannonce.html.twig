@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ListeAnnonce{% endblock %}
+
+{% block body %}
+
+ <div class="container-fluid">
+
+   
+   	   {% for message in app.flashes('error') %}
+          <div class="alert alert-danger" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+
+          
+   	   {% for message in app.flashes('success') %}
+          <div class="alert alert-success" role="alert">
+             {{message}}
+          </div>
+        {% endfor %}
+
+  <div class="row">
+{% for item in data %}
+  
+
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="card shadow mb-4">
+                                <!-- Card Header - Dropdown -->
+                                <div
+                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                    <h4 style="color:#37517e;">Titre:{{item.title}}</h4> 
+                                     <h6 style="font-family:Segoe UI Light;color:grey;">Categorie:{{item.category}}</h6>
+                                </div>
+                                <!-- Card Body -->
+                                <div class="card-body">
+                                    <div class="chart-pie pt-4 pb-2" style="margin:auto;">
+                                        <div style="width:100%;display:flex;justify-content: space-around;flex-wrap:wrap;">
+                                         {% if "mp4" in item.file %}
+                                          <video src="/image/{{item.file}}"  style="width:70%;height:230px;" controls></video>
+                                          {% else %}
+                                             <image src="/fichier/{{item.file}}" style="width:70%;height:230px;" id="listeAnnonce">
+                                          {% endif %}
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center small">
+                                        <span class="mr-2">
+                                          <a href="{{path('UpdateAnnonce',{'id':item.id})}}">
+                                            <button class="btn btn-success">modifier</button>
+                                          </a>
+                                        </span>
+                                        <span class="mr-2">
+                                         <a href="{{path('DeleteAnnonce',{'id':item.id})}}">
+                                           <button class="btn btn-danger">supprimer</button>
+                                         </a>
+                                        </span>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+     
+ 
+
+ 
+{% endfor %}
+   <div>
+ </div>
+ {% endblock %}
